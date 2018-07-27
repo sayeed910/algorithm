@@ -22,5 +22,31 @@ class KmpTest(unittest.TestCase):
         self.assertEqual(expected_table, kmp.prefixtable(text))
 
 
+    def test_match_returns_index_of_pattern_matched_in_test(self):
+        text = 'AAAAAAAAAAAAAAAAAB'
+        pattern = 'AAAB'
+
+        self.assertEqual(text.find(pattern), kmp.match(text, pattern))
+
+        text = 'AAAAABAAABA'
+        pattern = 'AAAA'
+
+        self.assertEqual(text.find(pattern), kmp.match(text, pattern))
+
+        text = 'ABABABCABABABCABABABC'
+        pattern = 'ABABAC'
+
+        self.assertEqual(text.find(pattern), kmp.match(text, pattern))
+
+
+    def test_match_returns_negative_1_if_pattern_not_in_text(self):
+        text = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+        pattern = 'AAAB'
+
+        self.assertEqual(-1, kmp.match(text, pattern))
+
+
+
+
 if __name__ == '__main__':
     unittest.main()
